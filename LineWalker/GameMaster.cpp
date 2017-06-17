@@ -42,13 +42,15 @@ void GameMaster::HandleMonsters(GameObjectManager & manager) {
 		if (thisMonster->GetIsFacingRight()) {
 			if (thisMonster->GetPosition().x > thisMonster->GetBoundingBox().width + (float)Game::SCREEN_WIDTH) {
 				//manager.Remove(it->Name);	
-				it->Dead = true;
+				//it->Dead = true;
+				it->Kill();
 			}
 		}
 		else {
 			if (thisMonster->GetPosition().x < -thisMonster->GetBoundingBox().width) {
 				//manager.Remove(it->Name);		
-				it->Dead = true;				
+				//it->Dead = true;				
+				it->Kill();
 			}
 		}
 

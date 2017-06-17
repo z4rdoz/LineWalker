@@ -159,7 +159,6 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Monster.cpp" />
-    <ClCompile Include="particle.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScoreCounter.cpp" />
     <ClCompile Include="Staffblast.cpp" />
@@ -176,7 +175,6 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Monster.h" />
-    <ClInclude Include="particle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScoreCounter.h" />
     <ClInclude Include="Staffblast.h" />

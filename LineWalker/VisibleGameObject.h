@@ -26,14 +26,21 @@ public:
 
 	sf::Sprite& GetSprite();
 
-	bool Dead = false;
+	virtual void Kill();
+	virtual bool IsKilled();
+	virtual bool IsFinallyDead();
+	
 	std::string Tag = "";
 	std::string Name = "";
+	float DeathDelay = 0.0f;
 private:
 	sf::Sprite _sprite;
 	sf::Texture _texture;
 	std::string _filename;
 	sf::FloatRect _collisionBox;
 	bool _isLoaded;
+	bool _isDead;
+	bool _killImmediately;
+	sf::Clock _deathClock;
 };
 

@@ -8,9 +8,7 @@ public:
 	StaffBlast(float,float,bool);
 	~StaffBlast();
 
-	void Update(float elapsedTime, sf::RenderWindow&);
-
-private:
-	sf::Clock _staffClock;
+	// Inherited via VisibleGameObject
+	virtual void Update(float elapsedTime, sf::RenderWindow &) override;
 };
 

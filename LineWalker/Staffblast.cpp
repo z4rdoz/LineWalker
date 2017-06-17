@@ -4,8 +4,7 @@
 
 StaffBlast::StaffBlast(float left, float top, bool upsideDown)
 {	
-	Load("assets/sprites/staffblast.png");
-	_staffClock.restart();
+	Load("assets/sprites/staffblast.png");	
 
 	GetSprite().setTextureRect(sf::IntRect(0, 0, 3, 4));
 
@@ -13,6 +12,9 @@ StaffBlast::StaffBlast(float left, float top, bool upsideDown)
 	GetSprite().setScale(Game::SCALE_FACTOR, Game::SCALE_FACTOR * (upsideDown ? -1 : 1));
 
 	GetSprite().setPosition(left, top);
+
+	DeathDelay = 0.1f;
+	Kill();
 }
 
 StaffBlast::~StaffBlast()
@@ -20,8 +22,6 @@ StaffBlast::~StaffBlast()
 	
 }
 
-void StaffBlast::Update(float elapsedTime, sf::RenderWindow&) {
-	if (_staffClock.getElapsedTime().asSeconds() > 0.1) {
-		Dead = true;
-	}	
+void StaffBlast::Update(float elapsedTime, sf::RenderWindow &)
+{
 }

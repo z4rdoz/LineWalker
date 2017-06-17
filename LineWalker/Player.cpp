@@ -128,8 +128,6 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 			SetAnimation("walking", true);
 			scaleX = -abs(scaleX);
 			_isFacingRight = false;
-		/*}
-		if (!isHitting) {*/
 			GetSprite().move(-(SPEED)*elapsedTime, 0);
 		}
 	}
@@ -138,8 +136,6 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 			SetAnimation("walking", true);
 			scaleX = abs(scaleX);
 			_isFacingRight = true;
-		/*}
-		if (!isHitting) {*/
 			GetSprite().move((SPEED)*elapsedTime, 0);
 		}
 	}
@@ -156,8 +152,8 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 void Player::OnCollision(VisibleGameObject * collideWithObj) {	
 	if (collideWithObj->Tag == "monster") {
 		Monster* monster = (Monster*)collideWithObj;
-		if (!monster->GetIsDead()) {
-			Dead = true;
+		if (!monster->IsFinallyDead()) {
+			Kill();
 		}
 	}
 }

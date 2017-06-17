@@ -2,9 +2,8 @@
 #include "Animation.h"
 #include "Game.h"
 
-Monster::Monster(bool onTop, bool facingRight, int movementSpeed) :
-	_isDead(false)
-	, _isSuperSized(false)	
+Monster::Monster(bool onTop, bool facingRight, int movementSpeed) :	
+	_isSuperSized(false)	
 	, _onTop(onTop)
 	, _facingRight(facingRight)
 	, MovementSpeed(movementSpeed)
@@ -24,7 +23,15 @@ Monster::Monster(bool onTop, bool facingRight, int movementSpeed) :
 
 	//expand on this
 	Animation* dead = new Animation();
+	dead->TimePerFrame = 0.05f;
+	//dead->AddFrame(sf::IntRect(0, 24, 24, 24));
+	dead->AddFrame(sf::IntRect(0, 72, 24, 24));
 	dead->AddFrame(sf::IntRect(24, 24, 24, 24));
+	dead->AddFrame(sf::IntRect(48, 24, 24, 24));
+	dead->AddFrame(sf::IntRect(0, 48, 24, 24));
+	dead->AddFrame(sf::IntRect(24, 48, 24, 24));
+	dead->AddFrame(sf::IntRect(48, 48, 24, 24));	
+	DeathDelay = dead->TimePerFrame*dead->GetSize();
 
 	AddAnimation("walking", walking);
 	AddAnimation("powerup", powerup);
@@ -52,9 +59,9 @@ Monster::~Monster()
 }
 
 void Monster::Update(float elapsedTime, sf::RenderWindow & window) {
-	if (_isDead) {
+	if (IsKilled()) {	
 		SetAnimation("dead", false);
-		Dead = true;
+		Kill();
 	}
 	else {
 		SetAnimation("walking");
@@ -72,9 +79,9 @@ void Monster::Update(float elapsedTime, sf::RenderWindow & window) {
 
 void Monster::OnCollision(VisibleGameObject* obj) {
 	if (obj->Name == "staff") {		
-		if (!_isDead) {
+		if (!IsKilled()) {
 			ScoreCounter::Increment();
 		}
-		_isDead = true;
+		Kill();
 	}
 }

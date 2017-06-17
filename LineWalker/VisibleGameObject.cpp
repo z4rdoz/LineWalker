@@ -68,6 +68,24 @@ sf::Sprite& VisibleGameObject::GetSprite() {
 	return _sprite;
 }
 
+void VisibleGameObject::Kill()
+{
+	if (!_isDead) {
+		_isDead = true;
+		_deathClock.restart();
+	}
+}
+
+bool VisibleGameObject::IsKilled() 
+{
+	return _isDead;
+}
+
+bool VisibleGameObject::IsFinallyDead()
+{
+	return (_isDead && _deathClock.getElapsedTime().asSeconds() >= DeathDelay);
+}
+
 float VisibleGameObject::GetWidth() {
 	return _sprite.getLocalBounds().width;
 }

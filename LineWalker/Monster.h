@@ -18,11 +18,7 @@ public:
 	bool GetOnTop() {
 		return _onTop;
 	}
-	bool GetIsDead() {
-		return _isDead;
-	}
-private:
-	bool _isDead;
+private:	
 	bool _isSuperSized;
 	bool _onTop;
 	bool _facingRight;

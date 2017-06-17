@@ -210,7 +210,7 @@ void Game::gameLoop()
 				}
 			}
 
-			if (_gameObjectManager.Get("player")->Dead) {
+			if (_gameObjectManager.Get("player")->IsFinallyDead()) {
 				_gameState = Game::ShowingMenu;
 			}
 

@@ -71,7 +71,7 @@ void GameObjectManager::UpdateAll(sf::RenderWindow & window, float timeDelta) {
 	auto it = _gameObjects.begin();	
 
 	while (it != _gameObjects.end()) {
-		if (it->second->Dead) {
+		if (it->second->IsFinallyDead()) {
 			Remove(it->second->Name);
 			break;
 		}
