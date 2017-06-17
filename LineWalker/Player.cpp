@@ -152,7 +152,7 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 void Player::OnCollision(VisibleGameObject * collideWithObj) {	
 	if (collideWithObj->Tag == "monster") {
 		Monster* monster = (Monster*)collideWithObj;
-		if (!monster->IsFinallyDead()) {
+		if (!monster->IsKilled()) {
 			Kill();
 		}
 	}
