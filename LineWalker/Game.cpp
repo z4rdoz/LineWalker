@@ -1,7 +1,6 @@
 #include "Game.h"
 #include "MainMenu.h"
 #include "Player.h"
-#include "Particle.h"
 #include "GameMaster.h"
 
 void Game::Start(void)
