@@ -2,6 +2,7 @@
 #include <random>
 #include "stdafx.h"
 
+//A class for my own little helper functions
 class Misc
 {
 public:

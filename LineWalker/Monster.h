@@ -12,10 +12,10 @@ public:
 
 	float MovementSpeed = 400.0f;
 
-	bool GetIsFacingRight() {
+	bool IsFacingRight() {
 		return _facingRight;
 	}
-	bool GetOnTop() {
+	bool IsOnTop() {
 		return _onTop;
 	}
 private:	

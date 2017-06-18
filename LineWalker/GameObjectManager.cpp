@@ -6,10 +6,14 @@
 GameObjectManager::GameObjectManager()
 {
 }
-
 GameObjectManager::~GameObjectManager()
-{
-	std::for_each(_gameObjects.begin(), _gameObjects.end(), GameObjectDeallocator());
+{			
+	for (auto& p : _gameObjects)
+	{
+		delete p.second;
+	}
+	//Changed to a range loop, kept this around in case
+	//std::for_each(_gameObjects.begin(), _gameObjects.end(), GameObjectDeallocator());
 }
 
 void GameObjectManager::Add(std::string name, VisibleGameObject* gameObject) {

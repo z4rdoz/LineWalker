@@ -37,6 +37,8 @@ Monster::Monster(bool onTop, bool facingRight, int movementSpeed) :
 	AddAnimation("powerup", powerup);
 	AddAnimation("dead", dead);
 
+	SetDeathAnimation("dead");
+
 	GetSprite().setTextureRect(sf::IntRect(0, 0, 24, 24));
 
 	GetSprite().setOrigin(12, 12);
@@ -53,14 +55,12 @@ Monster::Monster(bool onTop, bool facingRight, int movementSpeed) :
 		(_onTop) ? Game::LineTop - GetBoundingBox().height/2 : Game::LineBottom + GetBoundingBox().height/2);
 }
 
-
 Monster::~Monster()
 {
 }
 
 void Monster::Update(float elapsedTime, sf::RenderWindow & window) {
-	if (IsKilled()) {	
-		SetAnimation("dead", false);
+	if (IsKilled()) {			
 		Kill();
 	}
 	else {

@@ -3,6 +3,14 @@
 #include "GameMaster.h"
 #include "ScoreCounter.h"
 
+//Central game class. Also where I put my overall goals:
+//TODO improve the random monster spawning but also implement a wave system, to retain player interest and mange difficulty better
+//TODO Add Monster variations (mostly interms of size, bigger monsters might take two hits)
+//TODO Add penalty for a monster reaching the end?
+//TODO Juice! (screen shake, music, player death animation)
+//TODO Implement online leaderboard
+//TODO Add intro screen, where A.I. plays the game before the player starts. Maybe with an old arcade style scrolling text "story"
+
 class Game
 {
 
@@ -34,7 +42,6 @@ private:
 	
 	static sf::Clock _mainClock;
 	static sf::Clock _pacingClock;
-
 	static GameState _previousGameState;
 	static GameState _gameState;
 	static sf::RenderWindow _mainWindow;

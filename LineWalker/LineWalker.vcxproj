@@ -155,7 +155,6 @@
     <ClCompile Include="GameMaster.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainLine.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Misc.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -171,7 +170,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMaster.h" />
     <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="MainLine.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Misc.h" />
     <ClInclude Include="Monster.h" />

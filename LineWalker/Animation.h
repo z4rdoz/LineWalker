@@ -8,7 +8,9 @@ public:
 
 	void AddFrame(sf::IntRect rect);
 	sf::IntRect GetFrame(int frame);
+
 	int GetSize();
+
 	float TimePerFrame;	
 	
 private:	

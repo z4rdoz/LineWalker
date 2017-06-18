@@ -14,6 +14,8 @@ StaffBlast::StaffBlast(float left, float top, bool upsideDown)
 	GetSprite().setPosition(left, top);
 
 	DeathDelay = 0.1f;
+
+	//As soon as it is brought into this world, it must die. 
 	Kill();
 }
 

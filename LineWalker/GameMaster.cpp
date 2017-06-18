@@ -19,6 +19,8 @@ GameMaster::~GameMaster()
 {
 }
 
+//An attempt to get a rate that won't result in an impossible scenario
+//TODO actually prevent impossible scenarios/implement a legitimate difficulty curve
 void GameMaster::ResetMonsterSpawnRate() {	
 	bool goodRate = false;
 	float newSpawnRate;
@@ -39,17 +41,13 @@ void GameMaster::HandleMonsters(GameObjectManager & manager) {
 	for (auto it : monsters)
 	{
 		Monster* thisMonster = (Monster*)it;
-		if (thisMonster->GetIsFacingRight()) {
+		if (thisMonster->IsFacingRight()) {
 			if (thisMonster->GetPosition().x > thisMonster->GetBoundingBox().width + (float)Game::SCREEN_WIDTH) {
-				//manager.Remove(it->Name);	
-				//it->Dead = true;
 				it->Kill();
 			}
 		}
 		else {
-			if (thisMonster->GetPosition().x < -thisMonster->GetBoundingBox().width) {
-				//manager.Remove(it->Name);		
-				//it->Dead = true;				
+			if (thisMonster->GetPosition().x < -thisMonster->GetBoundingBox().width) {			
 				it->Kill();
 			}
 		}
@@ -87,21 +85,24 @@ void GameMaster::HandleMonsters(GameObjectManager & manager) {
 		int rights = 0;
 		int lefts = 0;
 		if (monsters.size() > 1) {
+			//Gets how many monsters are where
 			for (auto it : monsters) {
 				Monster* thisMonster = (Monster*)it;
-				if (thisMonster->GetOnTop()) {
+				if (thisMonster->IsOnTop()) {
 					tops++;
 				}
 				else {
 					bottoms++;
 				}
-				if (thisMonster->GetIsFacingRight()) {
+				if (thisMonster->IsFacingRight()) {
 					rights++;
 				}
 				else {
 					lefts++;
 				}
 			}
+			//Some safeguards against the randomness:
+			//If they're all on top, don't put this guy on top. If they're all on bottom, put him on top. Same for left and right.
 			if (onTop) {
 				if (tops == monsters.size()) onTop = false;
 			}

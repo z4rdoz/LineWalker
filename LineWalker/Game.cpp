@@ -185,11 +185,10 @@ void Game::gameLoop()
 
 			ScoreCounter::DrawInGame(_mainWindow);
 
+			//Draws the middle line
 			sf::RectangleShape line(sf::Vector2f(1024, LineWidth));
 			line.setFillColor(sf::Color::White);
-
 			line.setPosition(0, LineTop);
-
 			_mainWindow.draw(line);
 
 			sf::Event currentEvent;
@@ -246,6 +245,7 @@ void Game::newGame() {
 	_gameObjectManager.Add("player", player);		
 }
 
+//Initializing static variables:
 Game::GameState Game::_gameState = Uninitialized;
 sf::RenderWindow Game::_mainWindow;
 float Game::LineTop;

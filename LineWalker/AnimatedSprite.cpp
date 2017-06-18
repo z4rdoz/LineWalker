@@ -5,9 +5,7 @@
 AnimatedSprite::AnimatedSprite() : 
 	_frame(0)
 	, _animation()
-	, _defaultAnimation("")
 	, _isLooped(true)
-	, _name("")
 {	
 }
 
@@ -41,6 +39,13 @@ void AnimatedSprite::SetAnimation(std::string name, bool isLooped) {
 }
 void AnimatedSprite::SetDefaultAnimation(std::string name) {
 	_defaultAnimation = name;
+}
+
+void AnimatedSprite::SetDeathAnimation(std::string deathAnimation)
+{
+	_deathAnimation = deathAnimation;
+	auto dAnim = _animations.find(deathAnimation)->second;
+	DeathDelay = dAnim->GetSize()*dAnim->TimePerFrame;
 }
 
 Animation* AnimatedSprite::GetAnimation() const {
@@ -90,4 +95,12 @@ void AnimatedSprite::Play(float elapsedTime) {
 void AnimatedSprite::Stop() {
 	_frame = 0;
 	_clock = 0;
+}
+
+void AnimatedSprite::Kill()
+{	
+	if (_deathAnimation != "") {
+		SetAnimation(_deathAnimation, false);		
+	}
+	VisibleGameObject::Kill();
 }

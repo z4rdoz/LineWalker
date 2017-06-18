@@ -1,5 +1,7 @@
 #pragma once
 #include "stdafx.h"
+
+//Credit to gamefromscratch.com for the blueprint of this class. The site isn't currently loading, otherwise I would be more explicit with this credit.
 class VisibleGameObject
 {
 public:
@@ -28,10 +30,14 @@ public:
 
 	virtual void Kill();
 	virtual bool IsKilled();
+
+	//Whether or not the death delay, if any, has run out after it has been killed
 	virtual bool IsFinallyDead();
 	
 	std::string Tag = "";
 	std::string Name = "";
+
+	//How long after being killed until the object actuall is removed
 	float DeathDelay = 0.0f;
 private:
 	sf::Sprite _sprite;

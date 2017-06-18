@@ -6,7 +6,6 @@ Player::Player() :
 	_canHit(true)
 	, _canMove(true)
 	, _hitRelease(true)
-	, _hopRelease(true)
 	, _isUpsideDown(false)
 	, _isFacingRight(true)
 {
@@ -31,7 +30,6 @@ Player::Player() :
 
 	SetDefaultAnimation("standing");
 
-
 	GetSprite().setTextureRect(sf::IntRect(0, 0, 16, 16));
 
 	SetCollisionBox(sf::FloatRect(4, 4, 9, 12));
@@ -47,39 +45,11 @@ Player::~Player()
 {
 }
 
-void Player::Update(float elapsedTime, sf::RenderWindow& window) {
-	bool isHitting = GetAnimationName() == "hitting";
-	if (isHitting) {
-		if (GetFrame() == 1) {
-			/*float x, y;
-			if (_isUpsideDown) {
-				y = Game::LineTop;
-			}
-			else {
-				y = Game::LineBottom;
-			}
-			if (_isFacingRight) {
-				x = GetSprite().getPosition().x + 3 * Game::SCALE_FACTOR;
-			}
-			else {
-				x = GetSprite().getPosition().x - 6 * Game::SCALE_FACTOR;
-			}
-			Game::AddObject("staff", new StaffBlast(x,y, _isUpsideDown));*/
-		}
-	}
-	else {
-		if (_playerClock.getElapsedTime().asSeconds() > MOVEMENT_COOLDOWN) {
-			_canMove = true;
-		}
-		if (_playerClock.getElapsedTime().asSeconds() > HIT_COOLDOWN) {
-			_canHit = true;
-		}
-	}
-
+void Player::Update(float elapsedTime, sf::RenderWindow& window) {	
+	//Get the scale because messing with it
 	float scaleX = GetSprite().getScale().x;
-	bool hitting = false;
-	//sf::Event event;
-	sf::Time time;
+
+	//If the player presses UP and is on the bottom move to the top. If the player presses down and is on top, move to the bottom.
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		if (_isUpsideDown) {
 			GetSprite().setScale(GetSprite().getScale().x, -GetSprite().getScale().y);
@@ -92,6 +62,18 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 			GetSprite().setScale(GetSprite().getScale().x, -GetSprite().getScale().y);
 			GetSprite().setPosition(GetSprite().getPosition().x, GetSprite().getPosition().y + Game::LineWidth + GetBoundingBox().height);
 			_isUpsideDown = true;
+		}
+	}
+
+	//TODO find a less... sloppy way to determine if the player is hitting
+	bool isHitting = GetAnimationName() == "hitting";
+	if (!isHitting)
+	{
+		if (_playerClock.getElapsedTime().asSeconds() > MOVEMENT_COOLDOWN) {
+			_canMove = true;
+		}
+		if (_playerClock.getElapsedTime().asSeconds() > HIT_COOLDOWN) {
+			_canHit = true;
 		}
 	}
 
@@ -120,12 +102,16 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 			_hitRelease = false;
 		}
 	}
+	//Any time the spacebad isn't active being pressed, _hitRelease is true, because it's only used in that context.
+	//TODO clean up this logic a bit
 	else {
 		_hitRelease = true;
 	}
+
+	//If you can and should move, move
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		if (_canMove && GetBoundingBox().left > 0) {
-			SetAnimation("walking", true);
+			SetAnimation("walking");
 			scaleX = -abs(scaleX);
 			_isFacingRight = false;
 			GetSprite().move(-(SPEED)*elapsedTime, 0);
@@ -133,15 +119,14 @@ void Player::Update(float elapsedTime, sf::RenderWindow& window) {
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		if (_canMove && GetBoundingBox().left + GetBoundingBox().width < 1024) {
-			SetAnimation("walking", true);
+			SetAnimation("walking");
 			scaleX = abs(scaleX);
 			_isFacingRight = true;
 			GetSprite().move((SPEED)*elapsedTime, 0);
 		}
 	}
 	else if (GetAnimationName() != "hitting") {
-		SetAnimation("standing");
-		_isLooped = true;
+		SetAnimation("standing");		
 	}
 
 	GetSprite().setScale(scaleX, GetSprite().getScale().y);
